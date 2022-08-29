@@ -709,7 +709,7 @@ select:active {
  */
 
 #noVNC_status {
-  opacity: 0;
+  opacity: 0 !important;
   position: fixed;
   top: 0;
   left: 0;
