@@ -120,15 +120,16 @@ const UI = {
 
         document.documentElement.classList.remove("noVNC_loading");
 
-        let autoconnect = WebUtil.getConfigVar('autoconnect', false);
-        if (autoconnect === 'true' || autoconnect == '1') {
-            autoconnect = true;
-            UI.connect();
-        } else {
-            autoconnect = false;
-            // Show the connect panel on first load unless autoconnecting
-            UI.openConnectPanel();
-        }
+        // let autoconnect = WebUtil.getConfigVar('autoconnect', false);
+        // if (autoconnect === 'true' || autoconnect == '1') {
+        //     autoconnect = true;
+        //     UI.connect();
+        // } else {
+        //     autoconnect = false;
+        //     // Show the connect panel on first load unless autoconnecting
+        //     UI.openConnectPanel();
+        // }
+        UI.connect();
 
         return Promise.resolve(UI.rfb);
     },
@@ -175,15 +176,15 @@ const UI = {
         UI.initSetting('encrypt', (window.location.protocol === "https:"));
         UI.initSetting('view_clip', false);
         UI.initSetting('resize', 'off');
-        UI.initSetting('quality', 6);
+        UI.initSetting('quality', 9);
         UI.initSetting('compression', 2);
         UI.initSetting('shared', true);
         UI.initSetting('view_only', false);
         UI.initSetting('show_dot', false);
         UI.initSetting('path', 'websockify');
         UI.initSetting('repeaterID', '');
-        UI.initSetting('reconnect', false);
-        UI.initSetting('reconnect_delay', 5000);
+        UI.initSetting('reconnect', true);
+        UI.initSetting('reconnect_delay', 2000);
 
         UI.setupSettingLabels();
     },
@@ -1052,8 +1053,8 @@ const UI = {
         UI.rfb.addEventListener("bell", UI.bell);
         UI.rfb.addEventListener("desktopname", UI.updateDesktopName);
         UI.rfb.clipViewport = UI.getSetting('view_clip');
-        UI.rfb.scaleViewport = UI.getSetting('resize') === 'scale';
-        UI.rfb.resizeSession = UI.getSetting('resize') === 'remote';
+        UI.rfb.scaleViewport = false;
+        UI.rfb.resizeSession = true;
         UI.rfb.qualityLevel = parseInt(UI.getSetting('quality'));
         UI.rfb.compressionLevel = parseInt(UI.getSetting('compression'));
         UI.rfb.showDotCursor = UI.getSetting('show_dot');

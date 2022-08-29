@@ -338,6 +338,7 @@ select:active {
   /* The anchor is needed to get z-stacking to work */
   position: fixed;
   z-index: 10;
+  left: -999px !important;
 
   transition: 0.5s ease-in-out;
 
@@ -708,6 +709,7 @@ select:active {
  */
 
 #noVNC_status {
+  opacity: 0;
   position: fixed;
   top: 0;
   left: 0;
