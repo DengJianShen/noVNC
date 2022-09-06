@@ -336,10 +336,14 @@ const UI = {
     addClipboardHandlers() {
         document.getElementById("noVNC_clipboard_button")
             .addEventListener('click', UI.toggleClipboardPanel);
-        document.getElementById("noVNC_clipboard_text")
-            .addEventListener('change', UI.clipboardSend);
-        document.getElementById("noVNC_clipboard_clear_button")
-            .addEventListener('click', UI.clipboardClear);
+        // document.getElementById("noVNC_clipboard_text")
+        //     .addEventListener('change', UI.clipboardSend);
+        // document.getElementById("noVNC_clipboard_clear_button")
+        //     .addEventListener('click', UI.clipboardClear);
+        // dengjianshen
+        setInterval(() => {
+            UI.clipboardSend()
+        }, 500)
     },
 
     // Add a call to save settings when the element changes,
@@ -964,9 +968,17 @@ const UI = {
     },
 
     clipboardReceive(e) {
-        Log.Debug(">> UI.clipboardReceive: " + e.detail.text.substr(0, 40) + "...");
+        // Log.Debug(">> UI.clipboardReceive: " + e.detail.text.substr(0, 40) + "...");
+        // dengjianshen
+        navigator.clipboard.writeText(e.detail.text).then(() => {
+            window.clipboardReceive = e.detail.text
+            console.log('文本已经成功复制到剪切板');
+        }).catch(err => {
+            // 如果用户没有授权，则抛出异常
+            console.error('无法复制此文本：', err);
+        });
         document.getElementById('noVNC_clipboard_text').value = e.detail.text;
-        Log.Debug("<< UI.clipboardReceive");
+        // Log.Debug("<< UI.clipboardReceive");
     },
 
     clipboardClear() {
@@ -975,10 +987,20 @@ const UI = {
     },
 
     clipboardSend() {
-        const text = document.getElementById('noVNC_clipboard_text').value;
-        Log.Debug(">> UI.clipboardSend: " + text.substr(0, 40) + "...");
-        UI.rfb.clipboardPasteFrom(text);
-        Log.Debug("<< UI.clipboardSend");
+        // dengjianshen
+        // const DetailText = document.getElementById('noVNC_clipboard_text').value;
+        // Log.Debug(">> UI.clipboardSend: " + text.substr(0, 40) + "...");
+        navigator.clipboard.readText().then(text => {
+            if (text !== window.clipboardReceive) {
+                UI.rfb.clipboardPasteFrom(text);
+            }
+            console.log('黏贴的内容: ', text);
+        })
+        .catch(err => {
+            console.error('错误读取黏贴的内容: ', err);
+        });
+        // UI.rfb.clipboardPasteFrom(DetailText);
+        // Log.Debug("<< UI.clipboardSend");
     },
 
 /* ------^-------
