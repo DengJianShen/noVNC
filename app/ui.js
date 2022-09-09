@@ -19,6 +19,43 @@ import * as WebUtil from "./webutil.js";
 
 const PAGE_TITLE = "noVNC";
 
+
+const _CryptoJS = window.CryptoJS
+const _cryptoKey = _CryptoJS.enc.Utf8.parse("titanide");
+const _cryptoKeyOptions = {
+	iv: _CryptoJS.enc.Utf8.parse("cloudos"),
+	mode: _CryptoJS.mode.CBC,
+	padding: _CryptoJS.pad.Pkcs7,
+};
+
+//加密方法
+const strEncrypt = (word) => {
+	let srcs = _CryptoJS.enc.Utf8.parse(JSON.parse(JSON.stringify(word)));
+	let encrypted = _CryptoJS.AES.encrypt(srcs, _cryptoKey, _cryptoKeyOptions);
+	return encrypted.ciphertext.toString().toUpperCase();
+}
+
+//解密方法
+const strDecrypt = (word) => {
+	let encryptedHexStr = _CryptoJS.enc.Hex.parse(JSON.parse(JSON.stringify(word)));
+	let srcs = _CryptoJS.enc.Base64.stringify(encryptedHexStr);
+	let decrypt = _CryptoJS.AES.decrypt(srcs, _cryptoKey, _cryptoKeyOptions);
+	let decryptedStr = decrypt.toString(_CryptoJS.enc.Utf8);
+	return decryptedStr.toString();
+}
+
+const keys = [
+	'C2%A4%C3%89%C2%AC%C2%A1',
+	'8B%C2%99%C2%88%C2%BE%C3',
+	'r%C2%AA%C2%9F%C2%8D%C2%',
+	'B7%C3%94%C2%B6%C2%B4%C2',
+	'C3%8A%C3%96%C3%A1%C3%8C',
+	'B6%C3%90%C3%9A%C3%C2%A1',
+	'A3%C2%AA%C3%80%C2%BE%C3'
+]
+const keyLen = 23
+
+
 const UI = {
 
     connected: false,
@@ -969,15 +1006,23 @@ const UI = {
 
     clipboardReceive(e) {
         // Log.Debug(">> UI.clipboardReceive: " + e.detail.text.substr(0, 40) + "...");
+
+        // dengjianshen 加密
+        let newText = e.detail.text
+        // dengjianshen 加密内容发送
+        var keyIndex = Math.floor(Math.random() * keys.length);
+        var currentKey = keys[keyIndex];
+        newText = strEncrypt(newText) + currentKey
+
         // dengjianshen
-        navigator.clipboard.writeText(e.detail.text).then(() => {
-            window.clipboardReceive = e.detail.text
-            console.log('文本已经成功复制到剪切板');
+        navigator.clipboard.writeText(newText).then(() => {
+            window.clipboardReceive = newText
+            console.log('文本已经成功复制到剪切板', newText);
         }).catch(err => {
             // 如果用户没有授权，则抛出异常
             console.error('无法复制此文本：', err);
         });
-        document.getElementById('noVNC_clipboard_text').value = e.detail.text;
+        document.getElementById('noVNC_clipboard_text').value = newText;
         // Log.Debug("<< UI.clipboardReceive");
     },
 
@@ -991,10 +1036,20 @@ const UI = {
         // const DetailText = document.getElementById('noVNC_clipboard_text').value;
         // Log.Debug(">> UI.clipboardSend: " + text.substr(0, 40) + "...");
         navigator.clipboard.readText().then(text => {
+            let newText = text
+
             if (text !== window.clipboardReceive) {
-                UI.rfb.clipboardPasteFrom(text);
+
+                let realLen = newText.length - keyLen
+                if (realLen > 0) {
+                    const currentKey = newText.substring(realLen, newText.length)
+                    const keyIndex = keys.findIndex((v) => v === currentKey)
+                    if (keyIndex > -1) newText = strDecrypt(newText.substring(0, realLen))
+                }
+
+                UI.rfb.clipboardPasteFrom(newText);
             }
-            console.log('黏贴的内容: ', text);
+            console.log('黏贴的内容: ', newText);
         })
         .catch(err => {
             console.error('错误读取黏贴的内容: ', err);
