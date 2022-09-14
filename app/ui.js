@@ -1017,7 +1017,7 @@ const UI = {
         // dengjianshen
         navigator.clipboard.writeText(newText).then(() => {
             window.clipboardReceive = newText
-            console.log('文本已经成功复制到剪切板', newText);
+            // console.log('文本已经成功复制到剪切板', newText);
         }).catch(err => {
             // 如果用户没有授权，则抛出异常
             console.error('无法复制此文本：', err);
@@ -1049,7 +1049,7 @@ const UI = {
 
                 UI.rfb.clipboardPasteFrom(newText);
             }
-            console.log('黏贴的内容: ', newText);
+            // console.log('黏贴的内容: ', newText);
         })
         .catch(err => {
             console.error('错误读取黏贴的内容: ', err);
