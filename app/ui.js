@@ -168,6 +168,23 @@ const UI = {
         // }
         UI.connect();
 
+        document.querySelector('canvas').onkeydown = e => {
+            console.log('keydown')
+            if (e.keyCode === 17) {
+              UI.sendKey(KeyTable.XK_Control_L, "ControlLeft", true);
+            } else if (e.keyCode === 91) {
+              UI.sendKey(KeyTable.XK_Super_L, "MetaLeft", true);
+            }
+        }
+        document.querySelector('canvas').onkeyup = e => {
+            console.log('keyup')
+            if (e.keyCode === 17) {
+                UI.sendKey(KeyTable.XK_Control_L, "ControlLeft", false);
+            } else if (e.keyCode === 91) {
+                UI.sendKey(KeyTable.XK_Super_L, "MetaLeft", false);
+            }
+        }
+
         return Promise.resolve(UI.rfb);
     },
 
