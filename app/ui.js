@@ -44,6 +44,19 @@ const strDecrypt = (word) => {
 	return decryptedStr.toString();
 }
 
+const debounce = (func, delay) => {
+    let timer;
+
+    return function (...args) {
+        if (timer) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+            func.apply(this, args)
+        }, delay);
+    };
+};
+
 const keys = [
 	'C2%A4%C3%89%C2%AC%C2%A1',
 	'8B%C2%99%C2%88%C2%BE%C3',
@@ -169,22 +182,14 @@ const UI = {
         UI.connect();
 
         // dengjianshen
-        // document.querySelector('canvas').onkeydown = e => {
-        //     console.log('keydown')
-        //     if (e.keyCode === 17) {
-        //       UI.sendKey(KeyTable.XK_Control_L, "ControlLeft", true);
-        //     } else if (e.keyCode === 91) {
-        //       UI.sendKey(KeyTable.XK_Super_L, "MetaLeft", true);
-        //     }
-        // }
-        // document.querySelector('canvas').onkeyup = e => {
-        //     console.log('keyup')
-        //     if (e.keyCode === 17) {
-        //         UI.sendKey(KeyTable.XK_Control_L, "ControlLeft", false);
-        //     } else if (e.keyCode === 91) {
-        //         UI.sendKey(KeyTable.XK_Super_L, "MetaLeft", false);
-        //     }
-        // }
+        document.querySelector('canvas').onmousemove = debounce(() => {
+            window.parent.recycling();
+        }, 500)
+
+        document.querySelector('canvas').onkeyup = debounce(() => {
+            console.log('keyup')
+            window.parent.recycling();
+        }, 500)
 
         return Promise.resolve(UI.rfb);
     },
