@@ -181,7 +181,6 @@ const UI = {
         // }
         UI.connect();
 
-        // dengjianshen
         document.querySelector('canvas').onmousemove = debounce(() => {
             window.parent.recycling();
         }, 500)
@@ -404,6 +403,7 @@ const UI = {
         // dengjianshen
         setInterval(() => {
             UI.clipboardSend()
+            // UI.rfb.heartbeat()
         }, 500)
     },
 
@@ -1159,11 +1159,6 @@ const UI = {
         UI.rfb.qualityLevel = parseInt(UI.getSetting('quality'));
         UI.rfb.compressionLevel = parseInt(UI.getSetting('compression'));
         UI.rfb.showDotCursor = UI.getSetting('show_dot');
-
-        // dengjianshen
-        setInterval(() => {
-            UI.rfb.heartbeat()
-        }, 3000)
 
         UI.updateViewOnly(); // requires UI.rfb
     },
