@@ -1862,4 +1862,6 @@ if (l10n.language === "en" || l10n.dictionary !== undefined) {
         .then(UI.prime);
 }
 
+window.UI = UI
+
 export default UI;
