@@ -181,16 +181,6 @@ const UI = {
         // }
         UI.connect();
 
-        // dengjianshen
-        document.querySelector('canvas').onmousemove = debounce(() => {
-            window.parent.recycling();
-        }, 500)
-
-        document.querySelector('canvas').onkeyup = debounce(() => {
-            console.log('keyup')
-            window.parent.recycling();
-        }, 500)
-
         return Promise.resolve(UI.rfb);
     },
 
@@ -400,9 +390,20 @@ const UI = {
         //     .addEventListener('change', UI.clipboardSend);
         // document.getElementById("noVNC_clipboard_clear_button")
         //     .addEventListener('click', UI.clipboardClear);
+
         // dengjianshen
+        document.querySelector('canvas').onmousemove = debounce(() => {
+            window.parent.recycling();
+        }, 500)
+
+        document.querySelector('canvas').onkeyup = debounce(() => {
+            console.log('keyup')
+            window.parent.recycling();
+        }, 500)
+
         setInterval(() => {
             UI.clipboardSend()
+            UI.rfb.heartbeat()
         }, 500)
     },
 
