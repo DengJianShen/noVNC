@@ -403,10 +403,7 @@ const UI = {
         // dengjianshen
         setInterval(() => {
             UI.clipboardSend()
-            if (UI.rfb && UI.rfb.heartbeat) {
-                console.log('heartbeat')
-                UI.rfb.heartbeat()
-            }
+            UI.updateQuality()
         }, 500)
     },
 

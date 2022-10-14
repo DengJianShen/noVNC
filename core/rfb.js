@@ -473,11 +473,6 @@ export default class RFB extends EventTargetMixin {
         }
     }
 
-    // dengjianshen
-    heartbeat() {
-        this._sock.sendString('heartbeat')
-    }
-
     focus(options) {
         this._canvas.focus(options);
     }
