@@ -932,7 +932,7 @@ export default class RFB extends EventTargetMixin {
                     window.vncTimer = true
                     setInterval(() => {
                         console.log('_sock send')
-                        this._sock.send([]);
+                        this._sock.send([0, 0, 0, 0]);
                     }, 3000)
                 }
                 while (true) {
