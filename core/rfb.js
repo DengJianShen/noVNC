@@ -85,6 +85,8 @@ const extendedClipboardActionPeek    = 1 << 26;
 const extendedClipboardActionNotify  = 1 << 27;
 const extendedClipboardActionProvide = 1 << 28;
 
+window.vncTimer = null
+
 export default class RFB extends EventTargetMixin {
     constructor(target, urlOrChannel, options) {
         if (!target) {
@@ -925,6 +927,14 @@ export default class RFB extends EventTargetMixin {
                 Log.Error("Got data while disconnected");
                 break;
             case 'connected':
+                // dengjianshen
+                if (!window.vncTimer) {
+                    window.vncTimer = true
+                    setInterval(() => {
+                        console.log('_sock send')
+                        this._sock.send([]);
+                    }, 3000)
+                }
                 while (true) {
                     if (this._flushing) {
                         break;
