@@ -85,7 +85,7 @@ const extendedClipboardActionPeek    = 1 << 26;
 const extendedClipboardActionNotify  = 1 << 27;
 const extendedClipboardActionProvide = 1 << 28;
 
-window.vncTimer = null
+// window.vncTimer = null
 
 export default class RFB extends EventTargetMixin {
     constructor(target, urlOrChannel, options) {
@@ -928,13 +928,13 @@ export default class RFB extends EventTargetMixin {
                 break;
             case 'connected':
                 // dengjianshen
-                if (!window.vncTimer) {
-                    window.vncTimer = true
-                    setInterval(() => {
-                        console.log('_sock send')
-                        this._sock.send([0, 0, 0, 0]);
-                    }, 3000)
-                }
+                // if (!window.vncTimer) {
+                //     window.vncTimer = true
+                //     setInterval(() => {
+                //         console.log('_sock send')
+                //         this._sock.send([0, 0, 0, 0]);
+                //     }, 3000)
+                // }
                 while (true) {
                     if (this._flushing) {
                         break;
