@@ -183,14 +183,30 @@ const UI = {
         // }
         UI.connect();
 
-        document.querySelector('canvas').onmousemove = debounce(() => {
+        // dengjianshen
+        var canvas = document.querySelector('canvas')
+        canvas.onmousemove = debounce(() => {
             window.parent.recycling();
         }, 500)
-
-        document.querySelector('canvas').onkeyup = debounce(() => {
+        canvas.onkeyup = debounce(() => {
             console.log('keyup')
             window.parent.recycling();
         }, 500)
+        canvas.onfocus = () => {
+            console.log('focus')
+            if (window.heartbeatTimer) {
+                clearInterval(window.heartbeatTimer)
+                window.heartbeatTimer = null
+            }
+        }
+        canvas.onblur = () => {
+            console.log('blur')
+            if (!window.heartbeatTimer) {
+                window.heartbeatTimer = setInterval(() => {
+                    UI.heartbeat()
+                }, 2000)
+            }
+        }
 
         return Promise.resolve(UI.rfb);
     },
@@ -407,25 +423,6 @@ const UI = {
             UI.clipboardSend()
             // heartbeat
         }, 500)
-
-        var canvas = document.getElementsByTagName('canvas')[0]
-        canvas.onfocus = () => {
-            // dengjianshen
-            console.log('focus')
-            if (window.heartbeatTimer) {
-                clearInterval(window.heartbeatTimer)
-                window.heartbeatTimer = null
-            }
-        }
-        canvas.onblur = () => {
-            // dengjianshen
-            console.log('blur')
-            if (!window.heartbeatTimer) {
-                window.heartbeatTimer = setInterval(() => {
-                    UI.heartbeat()
-                }, 2000)
-            }
-        }
     },
 
     // Add a call to save settings when the element changes,
