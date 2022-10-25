@@ -407,6 +407,25 @@ const UI = {
             UI.clipboardSend()
             // heartbeat
         }, 500)
+
+        var canvas = document.getElementsByTagName('canvas')[0]
+        canvas.onfocus = () => {
+            // dengjianshen
+            console.log('focus')
+            if (window.heartbeatTimer) {
+                clearInterval(window.heartbeatTimer)
+                window.heartbeatTimer = null
+            }
+        }
+        canvas.onblur = () => {
+            // dengjianshen
+            console.log('blur')
+            if (!window.heartbeatTimer) {
+                window.heartbeatTimer = setInterval(() => {
+                    UI.heartbeat()
+                }, 2000)
+            }
+        }
     },
 
     // Add a call to save settings when the element changes,
@@ -1551,12 +1570,6 @@ const UI = {
     },
 
     onfocusVirtualKeyboard(event) {
-        // dengjianshen
-        console.log('focus')
-        if (window.heartbeatTimer) {
-            clearInterval(window.heartbeatTimer)
-            window.heartbeatTimer = null
-        }
         document.getElementById('noVNC_keyboard_button')
             .classList.add("noVNC_selected");
         if (UI.rfb) {
@@ -1565,13 +1578,6 @@ const UI = {
     },
 
     onblurVirtualKeyboard(event) {
-        // dengjianshen
-        console.log('blur')
-        if (!window.heartbeatTimer) {
-            window.heartbeatTimer = setInterval(() => {
-                UI.heartbeat()
-            }, 2000)
-        }
         document.getElementById('noVNC_keyboard_button')
             .classList.remove("noVNC_selected");
         if (UI.rfb) {
