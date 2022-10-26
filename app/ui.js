@@ -194,10 +194,12 @@ const UI = {
         var canvas = document.querySelector('canvas')
         canvas.onmousemove = debounce(() => {
             window.parent.recycling();
+            window.parent.tabAlive();
         }, 500)
         canvas.onkeyup = debounce(() => {
             console.log('keyup')
             window.parent.recycling();
+            window.parent.tabAlive();
         }, 500)
         canvas.onfocus = () => {
             console.log('focus')
