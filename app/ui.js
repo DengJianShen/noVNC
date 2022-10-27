@@ -207,6 +207,7 @@ const UI = {
                 clearInterval(window.heartbeatTimer)
                 window.heartbeatTimer = null
             }
+            UI.clipboardSend()
         }
         canvas.onblur = () => {
             console.log('blur')
@@ -428,10 +429,9 @@ const UI = {
         //     .addEventListener('click', UI.clipboardClear);
 
         // dengjianshen
-        setInterval(() => {
-            UI.clipboardSend()
-            // heartbeat
-        }, 500)
+        // setInterval(() => {
+            // UI.clipboardSend()
+        // }, 500)
     },
 
     // Add a call to save settings when the element changes,
