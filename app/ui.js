@@ -77,6 +77,7 @@ const keyLen = 23
 
 window.heartbeatTimer = null
 
+window.canJiaMi = true
 
 const UI = {
 
@@ -1063,7 +1064,13 @@ const UI = {
         // dengjianshen 加密内容发送
         var keyIndex = Math.floor(Math.random() * keys.length);
         var currentKey = keys[keyIndex];
-        newText = strEncrypt(newText) + currentKey
+
+
+        if (window.canJiaMi) {
+            newText = strEncrypt(newText) + currentKey
+        }
+
+        // newText = strEncrypt(newText) + currentKey
 
         // dengjianshen
         navigator.clipboard.writeText(newText).then(() => {
@@ -1091,13 +1098,15 @@ const UI = {
 
             if (text !== window.clipboardReceive) {
 
-                let realLen = newText.length - keyLen
-                if (realLen > 0) {
-                    const currentKey = newText.substring(realLen, newText.length)
-                    const keyIndex = keys.findIndex((v) => v === currentKey)
-                    if (keyIndex > -1) newText = strDecrypt(newText.substring(0, realLen))
+                if (window.canJiaMi) {
+                    let realLen = newText.length - keyLen
+                    if (realLen > 0) {
+                        const currentKey = newText.substring(realLen, newText.length)
+                        const keyIndex = keys.findIndex((v) => v === currentKey)
+                        if (keyIndex > -1) newText = strDecrypt(newText.substring(0, realLen))
+                    }
                 }
-
+                
                 UI.rfb.clipboardPasteFrom(newText);
             }
             // console.log('黏贴的内容: ', newText);
