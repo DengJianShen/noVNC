@@ -1106,7 +1106,7 @@ const UI = {
                         if (keyIndex > -1) newText = strDecrypt(newText.substring(0, realLen))
                     }
                 }
-                
+
                 UI.rfb.clipboardPasteFrom(newText);
             }
             // console.log('黏贴的内容: ', newText);
