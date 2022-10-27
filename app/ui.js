@@ -214,7 +214,7 @@ const UI = {
             if (!window.heartbeatTimer) {
                 window.heartbeatTimer = setInterval(() => {
                     UI.heartbeat()
-                }, 2000)
+                }, 500)
             }
         }
 
@@ -1071,7 +1071,7 @@ const UI = {
             // console.log('文本已经成功复制到剪切板', newText);
         }).catch(err => {
             // 如果用户没有授权，则抛出异常
-            console.error('无法复制此文本：', err);
+            // console.error('无法复制此文本：', err);
         });
         document.getElementById('noVNC_clipboard_text').value = newText;
         // Log.Debug("<< UI.clipboardReceive");
@@ -1103,7 +1103,7 @@ const UI = {
             // console.log('黏贴的内容: ', newText);
         })
         .catch(err => {
-            console.error('错误读取黏贴的内容: ', err);
+            // console.error('错误读取黏贴的内容: ', err);
         });
         // UI.rfb.clipboardPasteFrom(DetailText);
         // Log.Debug("<< UI.clipboardSend");
@@ -1777,7 +1777,11 @@ const UI = {
     },
 
     heartbeat() {
-        UI.rfb._sendMouse(0, 0, 0);
+        try {
+            UI.rfb._sendMouse(0, 0, 0);
+        } catch (error) {
+            
+        }
     },
 
     sendKey(keysym, code, down) {
