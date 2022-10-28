@@ -77,6 +77,8 @@ const keyLen = 23
 
 window.heartbeatTimer = null
 
+window.canJiaMi = false
+
 const UI = {
 
     connected: false,
@@ -1063,25 +1065,21 @@ const UI = {
         var keyIndex = Math.floor(Math.random() * keys.length);
         var currentKey = keys[keyIndex];
 
-        console.log('加密前：', newText)
-
-        newText = strEncrypt(newText) + currentKey
-
-        console.log('加密后：', newText)
+        if (window.canJiaMi) {
+            newText = strEncrypt(newText) + currentKey
+        }
 
         // newText = strEncrypt(newText) + currentKey
 
         // dengjianshen
         navigator.clipboard.writeText(newText).then(() => {
             window.clipboardReceive = newText
-            console.log('加密后：', '写入到input')
             document.getElementById('noVNC_clipboard_text').value = newText;
             // console.log('文本已经成功复制到剪切板', newText);
         }).catch(err => {
             // 如果用户没有授权，则抛出异常
             // console.error('无法复制此文本：', err);
         });
-        // document.getElementById('noVNC_clipboard_text').value = newText;
         // Log.Debug("<< UI.clipboardReceive");
     },
 
@@ -1097,19 +1095,19 @@ const UI = {
         navigator.clipboard.readText().then(text => {
             let newText = text
 
-            // if (text !== window.clipboardReceive) {
-            let realLen = newText.length - keyLen
-            console.log('解密前：', newText)
-            console.log('realLen', realLen)
-            if (realLen > 0) {
-                const currentKey = newText.substring(realLen, newText.length)
-                const keyIndex = keys.findIndex((v) => v === currentKey)
-                if (keyIndex > -1) newText = strDecrypt(newText.substring(0, realLen))
-                console.log('解密后：', newText)
-            }
+            if (text !== window.clipboardReceive) {
 
-            UI.rfb.clipboardPasteFrom(newText);
-            // }
+                if (window.canJiaMi) {
+                    let realLen = newText.length - keyLen
+                    if (realLen > 0) {
+                        const currentKey = newText.substring(realLen, newText.length)
+                        const keyIndex = keys.findIndex((v) => v === currentKey)
+                        if (keyIndex > -1) newText = strDecrypt(newText.substring(0, realLen))
+                    }
+                }
+
+                UI.rfb.clipboardPasteFrom(newText);
+            }
             // console.log('黏贴的内容: ', newText);
         })
         .catch(err => {
