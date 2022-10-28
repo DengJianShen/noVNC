@@ -1095,7 +1095,7 @@ const UI = {
         navigator.clipboard.readText().then(text => {
             let newText = text
 
-            if (text !== window.clipboardReceive) {
+            // if (text !== window.clipboardReceive) {
 
                 if (window.canJiaMi) {
                     let realLen = newText.length - keyLen
@@ -1107,7 +1107,7 @@ const UI = {
                 }
 
                 UI.rfb.clipboardPasteFrom(newText);
-            }
+            // }
             // console.log('黏贴的内容: ', newText);
         })
         .catch(err => {
