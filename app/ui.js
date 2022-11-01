@@ -77,7 +77,7 @@ const keyLen = 23
 
 window.heartbeatTimer = null
 
-window.canJiaMi = false
+window.canJiaMi = true
 
 const UI = {
 
@@ -198,12 +198,10 @@ const UI = {
             window.parent.tabAlive();
         }, 500)
         canvas.onkeyup = debounce(() => {
-            console.log('keyup')
             window.parent.recycling();
             window.parent.tabAlive();
         }, 500)
         canvas.onfocus = () => {
-            console.log('focus')
             if (window.heartbeatTimer) {
                 clearInterval(window.heartbeatTimer)
                 window.heartbeatTimer = null
@@ -211,7 +209,6 @@ const UI = {
             UI.clipboardSend()
         }
         canvas.onblur = () => {
-            console.log('blur')
             if (!window.heartbeatTimer) {
                 window.heartbeatTimer = setInterval(() => {
                     UI.heartbeat()
@@ -1061,6 +1058,9 @@ const UI = {
 
         // dengjianshen 加密
         let newText = e.detail.text
+
+        newText = newText.replace(/<(style|script|iframe)[^>]*?>[\s\S]+?<\/\1\s*>/gi,'').replace(/<[^>]+?>/g,'').replace(/\s+/g,' ').replace(/ /g,' ').replace(/>/g,' ')
+
         // dengjianshen 加密内容发送
         var keyIndex = Math.floor(Math.random() * keys.length);
         var currentKey = keys[keyIndex];
@@ -1094,6 +1094,8 @@ const UI = {
         // Log.Debug(">> UI.clipboardSend: " + text.substr(0, 40) + "...");
         navigator.clipboard.readText().then(text => {
             let newText = text
+
+            newText = newText.replace(/<(style|script|iframe)[^>]*?>[\s\S]+?<\/\1\s*>/gi,'').replace(/<[^>]+?>/g,'').replace(/\s+/g,' ').replace(/ /g,' ').replace(/>/g,' ')
 
             // if (text !== window.clipboardReceive) {
 
