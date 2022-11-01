@@ -1059,6 +1059,8 @@ const UI = {
         // dengjianshen 加密
         let newText = e.detail.text
 
+        if (!newText) return
+
         newText = newText.replace(/<(style|script|iframe)[^>]*?>[\s\S]+?<\/\1\s*>/gi,'').replace(/<[^>]+?>/g,'').replace(/\s+/g,' ').replace(/ /g,' ').replace(/>/g,' ')
 
         // dengjianshen 加密内容发送
@@ -1094,6 +1096,8 @@ const UI = {
         // Log.Debug(">> UI.clipboardSend: " + text.substr(0, 40) + "...");
         navigator.clipboard.readText().then(text => {
             let newText = text
+
+            if (!newText) return
 
             newText = newText.replace(/<(style|script|iframe)[^>]*?>[\s\S]+?<\/\1\s*>/gi,'').replace(/<[^>]+?>/g,'').replace(/\s+/g,' ').replace(/ /g,' ').replace(/>/g,' ')
 
