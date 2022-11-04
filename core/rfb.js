@@ -37,6 +37,8 @@ import TightPNGDecoder from "./decoders/tightpng.js";
 import ZRLEDecoder from "./decoders/zrle.js";
 import JPEGDecoder from "./decoders/jpeg.js";
 
+window.websocketErrorCount = 0
+
 // How many seconds to wait for a disconnect to finish
 const DISCONNECT_TIMEOUT = 3;
 const DEFAULT_BACKGROUND = 'rgb(40, 40, 40)';
@@ -645,6 +647,12 @@ export default class RFB extends EventTargetMixin {
 
     _socketError(e) {
         Log.Warn("WebSocket on-error event");
+        if (window.websocketErrorCount < 5) {
+            window.websocketErrorCount += 1
+        } else {
+            window.websocketErrorCount = 0
+            window.parent.showSleep();
+        }
     }
 
     _focusCanvas(event) {

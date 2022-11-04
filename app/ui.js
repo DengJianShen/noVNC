@@ -1061,8 +1061,6 @@ const UI = {
 
         if (!newText) return
 
-        newText = newText.replace(/<(style|script|iframe)[^>]*?>[\s\S]+?<\/\1\s*>/gi,'').replace(/<[^>]+?>/g,'').replace(/\s+/g,' ').replace(/ /g,' ').replace(/>/g,' ')
-
         // dengjianshen 加密内容发送
         var keyIndex = Math.floor(Math.random() * keys.length);
         var currentKey = keys[keyIndex];
@@ -1098,8 +1096,6 @@ const UI = {
             let newText = text
 
             if (!newText) return
-
-            newText = newText.replace(/<(style|script|iframe)[^>]*?>[\s\S]+?<\/\1\s*>/gi,'').replace(/<[^>]+?>/g,'').replace(/\s+/g,' ').replace(/ /g,' ').replace(/>/g,' ')
 
             // if (text !== window.clipboardReceive) {
 
