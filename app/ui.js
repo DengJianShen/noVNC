@@ -30,26 +30,42 @@ const _cryptoKeyOptions = {
 
 //加密方法
 const strEncrypt = (word) => {
-	// let srcs = _CryptoJS.enc.Utf8.parse(JSON.parse(JSON.stringify(word)));
-	// let encrypted = _CryptoJS.AES.encrypt(srcs, _cryptoKey, _cryptoKeyOptions);
-	// return encrypted.ciphertext.toString().toUpperCase();
-    const srcs = _CryptoJS.enc.Utf8.parse(word);
-    const encrypted = _CryptoJS.AES.encrypt(srcs,  _cryptoKey, _cryptoKeyOptions);
-    return _CryptoJS.enc.Base64.stringify(encrypted.ciphertext);
+	let srcs = _CryptoJS.enc.Utf8.parse(JSON.parse(JSON.stringify(word)));
+	let encrypted = _CryptoJS.AES.encrypt(srcs, _cryptoKey, _cryptoKeyOptions);
+	return encrypted.ciphertext.toString().toUpperCase();
 }
 
 //解密方法
 const strDecrypt = (word) => {
-	// let encryptedHexStr = _CryptoJS.enc.Hex.parse(JSON.parse(JSON.stringify(word)));
-	// let srcs = _CryptoJS.enc.Base64.stringify(encryptedHexStr);
-	// let decrypt = _CryptoJS.AES.decrypt(srcs, _cryptoKey, _cryptoKeyOptions);
-	// let decryptedStr = decrypt.toString(_CryptoJS.enc.Utf8);
-	// return decryptedStr.toString();
-    const encryptedHexStr = _CryptoJS.enc.Base64.parse(word);
-    const srcs = _CryptoJS.enc.Base64.stringify(encryptedHexStr);
-    const decrypt = _CryptoJS.AES.decrypt(srcs, _cryptoKey, _cryptoKeyOptions);
-    return decrypt.toString(_CryptoJS.enc.Utf8);
+	let encryptedHexStr = _CryptoJS.enc.Hex.parse(JSON.parse(JSON.stringify(word)));
+	let srcs = _CryptoJS.enc.Base64.stringify(encryptedHexStr);
+	let decrypt = _CryptoJS.AES.decrypt(srcs, _cryptoKey, _cryptoKeyOptions);
+	let decryptedStr = decrypt.toString(_CryptoJS.enc.Utf8);
+	return decryptedStr.toString();
 }
+
+// //加密方法
+// const strEncrypt = (word) => {
+// 	// let srcs = _CryptoJS.enc.Utf8.parse(JSON.parse(JSON.stringify(word)));
+// 	// let encrypted = _CryptoJS.AES.encrypt(srcs, _cryptoKey, _cryptoKeyOptions);
+// 	// return encrypted.ciphertext.toString().toUpperCase();
+//     const srcs = _CryptoJS.enc.Utf8.parse(word);
+//     const encrypted = _CryptoJS.AES.encrypt(srcs,  _cryptoKey, _cryptoKeyOptions);
+//     return _CryptoJS.enc.Base64.stringify(encrypted.ciphertext);
+// }
+
+// //解密方法
+// const strDecrypt = (word) => {
+// 	// let encryptedHexStr = _CryptoJS.enc.Hex.parse(JSON.parse(JSON.stringify(word)));
+// 	// let srcs = _CryptoJS.enc.Base64.stringify(encryptedHexStr);
+// 	// let decrypt = _CryptoJS.AES.decrypt(srcs, _cryptoKey, _cryptoKeyOptions);
+// 	// let decryptedStr = decrypt.toString(_CryptoJS.enc.Utf8);
+// 	// return decryptedStr.toString();
+//     const encryptedHexStr = _CryptoJS.enc.Base64.parse(word);
+//     const srcs = _CryptoJS.enc.Base64.stringify(encryptedHexStr);
+//     const decrypt = _CryptoJS.AES.decrypt(srcs, _cryptoKey, _cryptoKeyOptions);
+//     return decrypt.toString(_CryptoJS.enc.Utf8);
+// }
 
 const debounce = (func, delay) => {
     let timer;
