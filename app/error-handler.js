@@ -24,6 +24,16 @@ function handleError(event, err) {
 
         let div = document.createElement("div");
         div.classList.add('noVNC_message');
+        // dengjianshen 黏贴提醒
+        var tip = event.message
+        if (tip == 'TypeError: navigator.clipboard.readText is not a function') {
+            const explorer = window.navigator.userAgent
+            if (explorer.indexOf("Firefox") >= 0) {
+                tip = 'Firefox浏览器不支持粘贴板功能'
+            } else {
+                tip = '当前浏览器禁用了粘贴板功能'
+            }
+        }
         div.appendChild(document.createTextNode(event.message));
         msg.appendChild(div);
 

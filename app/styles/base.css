@@ -220,6 +220,13 @@ select:active {
  * WebKit centering hacks
  * ----------------------------------------
  */
+.icon-close {
+  transform: translate(565px,-90px);
+  background: transparent;
+  box-shadow: none;
+  z-index: 1;
+  cursor: pointer;
+}
 
 .noVNC_center {
   /*
