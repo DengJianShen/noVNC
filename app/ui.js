@@ -93,7 +93,7 @@ const keyLen = 23
 
 window.heartbeatTimer = null
 
-window.canJiaMi = true
+window.COPY_PROTECTION_ENABLE = false
 
 const UI = {
 
@@ -1081,7 +1081,7 @@ const UI = {
         var keyIndex = Math.floor(Math.random() * keys.length);
         var currentKey = keys[keyIndex];
 
-        if (window.canJiaMi) {
+        if (!window.COPY_PROTECTION_ENABLE) {
             newText = strEncrypt(newText) + currentKey
         }
 
@@ -1115,7 +1115,7 @@ const UI = {
 
             // if (text !== window.clipboardReceive) {
 
-                if (window.canJiaMi) {
+                if (!window.COPY_PROTECTION_ENABLE) {
                     let realLen = newText.length - keyLen
                     if (realLen > 0) {
                         const currentKey = newText.substring(realLen, newText.length)
@@ -1804,7 +1804,8 @@ const UI = {
 
     heartbeat() {
         try {
-            UI.rfb._sendMouse(0, 0, 0);
+            // dengjianshen
+            UI.rfb._heartBeat()
         } catch (error) {
             
         }

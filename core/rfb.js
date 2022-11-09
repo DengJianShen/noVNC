@@ -1100,6 +1100,12 @@ export default class RFB extends EventTargetMixin {
         this._mouseLastMoveTime = Date.now();
     }
 
+    // dengjianshen
+    _heartBeat() {
+        // RFB.messages.fbUpdateRequest(this._sock, false, 0, 0, this._fbWidth, this._fbHeight);
+        RFB.messages.pixelFormat(this._sock, this._fbDepth, true);
+    }
+
     _sendMouse(x, y, mask) {
         if (this._rfbConnectionState !== 'connected') { return; }
         if (this._viewOnly) { return; } // View only, skip mouse events
@@ -2228,7 +2234,8 @@ export default class RFB extends EventTargetMixin {
                     if (this._clipboardText != null) {
                         RFB.messages.extendedClipboardNotify(this._sock, [extendedClipboardFormatText]);
                     } else {
-                        RFB.messages.extendedClipboardNotify(this._sock, []);
+                        // dengjianshen
+                        // RFB.messages.extendedClipboardNotify(this._sock, []);
                     }
                 }
 
