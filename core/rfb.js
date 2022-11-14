@@ -1102,6 +1102,7 @@ export default class RFB extends EventTargetMixin {
 
     // dengjianshen
     _heartBeat() {
+        if (this._rfbConnectionState !== 'connected') { return; }
         // RFB.messages.fbUpdateRequest(this._sock, false, 0, 0, this._fbWidth, this._fbHeight);
         RFB.messages.pixelFormat(this._sock, this._fbDepth, true);
     }
