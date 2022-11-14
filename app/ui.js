@@ -1081,6 +1081,8 @@ const UI = {
         var keyIndex = Math.floor(Math.random() * keys.length);
         var currentKey = keys[keyIndex];
 
+        alert('clipboardReceive', e.detail.text)
+
         if (!window.COPY_PROTECTION_ENABLE) {
             newText = strEncrypt(newText) + currentKey
         }
@@ -1110,7 +1112,7 @@ const UI = {
         // Log.Debug(">> UI.clipboardSend: " + text.substr(0, 40) + "...");
         navigator.clipboard.readText().then(text => {
             let newText = text
-
+            alert('clipboardSend', text)
             if (!newText) return
 
             // if (text !== window.clipboardReceive) {
