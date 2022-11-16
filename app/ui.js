@@ -208,7 +208,7 @@ const UI = {
         UI.connect();
 
         // dengjianshen
-        window._refreshFiles = this._refreshFiles
+        window._refreshFiles = this.refreshFiles
         var canvas = document.querySelector('canvas')
         canvas.onmousemove = debounce(() => {
             window.parent.recycling();
