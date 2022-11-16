@@ -1099,7 +1099,16 @@ export default class RFB extends EventTargetMixin {
                         this._mouseButtonMask);
         this._mouseLastMoveTime = Date.now();
     }
+    _refreshFiles () {
+        if (this._rfbConnectionState !== 'connected') { return; }
+        this.sendKey(KeyTable.XK_Control_L, "ControlLeft", true);
+        this.sendKey(KeyTable.XK_Alt_L, "AltLeft", true);
+        this.sendKey(KeyTable.XK_Y, "KeyY", true);
 
+        this.sendKey(KeyTable.XK_Y, "KeyY", false);
+        this.sendKey(KeyTable.XK_Alt_L, "AltLeft", false);
+        this.sendKey(KeyTable.XK_Control_L, "ControlLeft", false);
+    }
     // dengjianshen
     _heartBeat() {
         if (this._rfbConnectionState !== 'connected') { return; }

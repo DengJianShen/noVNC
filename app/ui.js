@@ -208,6 +208,7 @@ const UI = {
         UI.connect();
 
         // dengjianshen
+        window._refreshFiles = this._refreshFiles
         var canvas = document.querySelector('canvas')
         canvas.onmousemove = debounce(() => {
             window.parent.recycling();
@@ -1808,6 +1809,15 @@ const UI = {
         try {
             // dengjianshen
             UI.rfb._heartBeat()
+        } catch (error) {
+            
+        }
+    },
+
+    refreshFiles() {
+        try {
+            // dengjianshen
+            UI.rfb._refreshFiles()
         } catch (error) {
             
         }
