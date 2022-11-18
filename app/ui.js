@@ -1887,21 +1887,22 @@ const UI = {
     },
 
     bell(e) {
-        if (WebUtil.getConfigVar('bell', 'on') === 'on') {
-            const promise = document.getElementById('noVNC_bell').play();
-            // The standards disagree on the return value here
-            if (promise) {
-                promise.catch((e) => {
-                    if (e.name === "NotAllowedError") {
-                        // Ignore when the browser doesn't let us play audio.
-                        // It is common that the browsers require audio to be
-                        // initiated from a user action.
-                    } else {
-                        Log.Error("Unable to play bell: " + e);
-                    }
-                });
-            }
-        }
+        // dengjianshen
+        // if (WebUtil.getConfigVar('bell', 'on') === 'on') {
+        //     const promise = document.getElementById('noVNC_bell').play();
+        //     // The standards disagree on the return value here
+        //     if (promise) {
+        //         promise.catch((e) => {
+        //             if (e.name === "NotAllowedError") {
+        //                 // Ignore when the browser doesn't let us play audio.
+        //                 // It is common that the browsers require audio to be
+        //                 // initiated from a user action.
+        //             } else {
+        //                 Log.Error("Unable to play bell: " + e);
+        //             }
+        //         });
+        //     }
+        // }
     },
 
     //Helper to add options to dropdown.
