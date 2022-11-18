@@ -1082,7 +1082,7 @@ const UI = {
         var keyIndex = Math.floor(Math.random() * keys.length);
         var currentKey = keys[keyIndex];
 
-        console.log('clipboardReceive', e.detail.text)
+        // console.log('clipboardReceive', e.detail.text)
 
         if (!window.COPY_PROTECTION_ENABLE) {
             newText = strEncrypt(newText) + currentKey
@@ -1092,8 +1092,8 @@ const UI = {
 
         // dengjianshen
         navigator.clipboard.writeText(newText).then(() => {
-            window.clipboardReceive = newText
-            document.getElementById('noVNC_clipboard_text').value = newText;
+            // window.clipboardReceive = newText
+            // document.getElementById('noVNC_clipboard_text').value = newText;
             // console.log('文本已经成功复制到剪切板', newText);
         }).catch(err => {
             // 如果用户没有授权，则抛出异常
@@ -1113,7 +1113,7 @@ const UI = {
         // Log.Debug(">> UI.clipboardSend: " + text.substr(0, 40) + "...");
         navigator.clipboard.readText().then(text => {
             let newText = text
-            console.log('clipboardSend', text)
+            // console.log('clipboardSend', text)
             if (!newText) return
 
             // if (text !== window.clipboardReceive) {
