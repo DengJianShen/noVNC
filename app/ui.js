@@ -1092,8 +1092,8 @@ const UI = {
 
         // dengjianshen
         navigator.clipboard.writeText(newText).then(() => {
-            // window.clipboardReceive = newText
-            // document.getElementById('noVNC_clipboard_text').value = newText;
+            window.clipboardReceive = newText
+            document.getElementById('noVNC_clipboard_text').value = newText;
             // console.log('文本已经成功复制到剪切板', newText);
         }).catch(err => {
             // 如果用户没有授权，则抛出异常
