@@ -669,14 +669,14 @@ export default class RFB extends EventTargetMixin {
             "desktopname",
             { detail: { name: this._fbName } }));
     }
-
+    // dengjianshen size
     _saveExpectedClientSize() {
-        this._expectedClientWidth = this._screen.clientWidth;
-        this._expectedClientHeight = this._screen.clientHeight;
+        this._expectedClientWidth = this._screen.clientWidth * 4;
+        this._expectedClientHeight = this._screen.clientHeight * 4;
     }
-
+    // dengjianshen size
     _currentClientSize() {
-        return [this._screen.clientWidth, this._screen.clientHeight];
+        return [this._screen.clientWidth * 4, this._screen.clientHeight * 4];
     }
 
     _clientHasExpectedSize() {
