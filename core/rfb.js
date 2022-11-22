@@ -770,9 +770,10 @@ export default class RFB extends EventTargetMixin {
     }
 
     // Gets the the size of the available screen
+    // dengjianshen size
     _screenSize() {
         let r = this._screen.getBoundingClientRect();
-        return { w: r.width, h: r.height };
+        return { w: r.width * 4, h: r.height * 4 };
     }
 
     _fixScrollbars() {
