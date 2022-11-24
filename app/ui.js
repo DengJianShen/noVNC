@@ -218,20 +218,21 @@ const UI = {
             window.parent.recycling();
             window.parent.tabAlive();
         }, 500)
-        canvas.onfocus = () => {
-            if (window.heartbeatTimer) {
-                clearInterval(window.heartbeatTimer)
-                window.heartbeatTimer = null
-            }
-            UI.clipboardSend()
-        }
-        canvas.onblur = () => {
-            if (!window.heartbeatTimer) {
-                window.heartbeatTimer = setInterval(() => {
-                    UI.heartbeat()
-                }, 500)
-            }
-        }
+
+        // canvas.onfocus = () => {
+        //     if (window.heartbeatTimer) {
+        //         clearInterval(window.heartbeatTimer)
+        //         window.heartbeatTimer = null
+        //     }
+        //     UI.clipboardSend()
+        // }
+        // canvas.onblur = () => {
+        //     if (!window.heartbeatTimer) {
+        //         window.heartbeatTimer = setInterval(() => {
+        //             UI.heartbeat()
+        //         }, 500)
+        //     }
+        // }
 
         return Promise.resolve(UI.rfb);
     },
@@ -447,6 +448,11 @@ const UI = {
         // setInterval(() => {
             // UI.clipboardSend()
         // }, 500)
+        // dengjianshen
+        setInterval(() => {
+            UI.heartbeat()
+            UI.clipboardSend()
+        }, 500)
     },
 
     // Add a call to save settings when the element changes,
