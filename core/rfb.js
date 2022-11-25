@@ -763,7 +763,7 @@ export default class RFB extends EventTargetMixin {
 
         // dengjianshen size
         RFB.messages.setDesktopSize(this._sock,
-                                    Math.floor(size.w * 4), Math.floor(size.h * 4),
+                                    Math.floor(size.w), Math.floor(size.h),
                                     this._screenID, this._screenFlags);
 
         Log.Debug('Requested new desktop size: ' +
