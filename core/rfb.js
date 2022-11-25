@@ -761,8 +761,9 @@ export default class RFB extends EventTargetMixin {
 
         const size = this._screenSize();
 
+        // dengjianshen size
         RFB.messages.setDesktopSize(this._sock,
-                                    Math.floor(size.w), Math.floor(size.h),
+                                    Math.floor(size.w * 4), Math.floor(size.h * 4),
                                     this._screenID, this._screenFlags);
 
         Log.Debug('Requested new desktop size: ' +
