@@ -468,7 +468,7 @@ const UI = {
             console.log('hhhhhhhhhhhh')
             UI.heartbeat()
             UI.clipboardSend()
-        }, 500)()
+        }, 200)()
     },
 
     // Add a call to save settings when the element changes,
