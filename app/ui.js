@@ -67,6 +67,17 @@ const strDecrypt = (word) => {
 //     return decrypt.toString(_CryptoJS.enc.Utf8);
 // }
 
+function hahaha(f, time) {
+    let timer;
+    return function walk() {
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            f();
+            walk(); 
+        }, time);
+    };
+}
+
 const debounce = (func, delay) => {
     let timer;
 
@@ -449,7 +460,12 @@ const UI = {
             // UI.clipboardSend()
         // }, 500)
         // dengjianshen
-        setInterval(() => {
+        // setInterval(() => {
+        //     UI.heartbeat()
+        //     UI.clipboardSend()
+        // }, 500)
+        hahaha(function () {
+            console.log('hhhhhhhhhhhh')
             UI.heartbeat()
             UI.clipboardSend()
         }, 500)
