@@ -133,16 +133,20 @@ export default class Keyboard {
         if (browser.isMac() || browser.isIOS()) {
             switch (keysym) {
                 case KeyTable.XK_Super_L:
-                    keysym = KeyTable.XK_Alt_L;
+                    // keysym = KeyTable.XK_Alt_L;
+                    keysym = KeyTable.XK_Meta_L; // 64 dengjianshen
                     break;
                 case KeyTable.XK_Super_R:
-                    keysym = KeyTable.XK_Super_L;
+                    // keysym = KeyTable.XK_Super_L;
+                    keysym = KeyTable.XK_Meta_R; // 133 dengjianshen
                     break;
                 case KeyTable.XK_Alt_L:
-                    keysym = KeyTable.XK_Mode_switch;
+                    keysym = KeyTable.XK_Mode_switch; // 203 dengjianshen
+                    // keysym = KeyTable.XK_Alt_L;
                     break;
                 case KeyTable.XK_Alt_R:
-                    keysym = KeyTable.XK_ISO_Level3_Shift;
+                    keysym = KeyTable.XK_ISO_Level3_Shift; // 92 dengjianshen
+                    // keysym = KeyTable.XK_Alt_R;
                     break;
             }
         }
