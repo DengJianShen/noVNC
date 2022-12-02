@@ -465,7 +465,6 @@ const UI = {
         //     UI.clipboardSend()
         // }, 500)
         hahaha(function () {
-            console.log('hhhhhhhhhhhh')
             UI.heartbeat()
             UI.clipboardSend()
         }, 200)()
