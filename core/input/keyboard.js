@@ -14,6 +14,19 @@ import * as browser from "../util/browser.js";
 // Keyboard event handler
 //
 
+function getQueryVariable(variable) {
+    var str = window.location.href.split('?');
+    var query = str[1];
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) {
+            return pair[1];
+        }
+    }
+    return (false);
+}
+
 export default class Keyboard {
     constructor(target) {
         this._target = target || null;
@@ -135,10 +148,16 @@ export default class Keyboard {
                 case KeyTable.XK_Super_L:
                     // keysym = KeyTable.XK_Alt_L;
                     keysym = KeyTable.XK_Meta_L; // 64 dengjianshen
+                    if (getQueryVariable('isCtrl') == true) {
+                        keysym = KeyTable.XK_Control_L
+                    }
                     break;
                 case KeyTable.XK_Super_R:
                     // keysym = KeyTable.XK_Super_L;
                     keysym = KeyTable.XK_Meta_R; // 133 dengjianshen
+                    if (getQueryVariable('isCtrl') == true) {
+                        keysym = KeyTable.XK_Control_L
+                    }
                     break;
                 case KeyTable.XK_Alt_L:
                     keysym = KeyTable.XK_Mode_switch; // 203 dengjianshen
