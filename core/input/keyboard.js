@@ -149,6 +149,7 @@ export default class Keyboard {
                     // keysym = KeyTable.XK_Alt_L;
                     keysym = KeyTable.XK_Meta_L; // 64 dengjianshen
                     if (getQueryVariable('isCtrl') == true) {
+                        console.log('使用ctrl')
                         keysym = KeyTable.XK_Control_L
                     }
                     break;
@@ -156,6 +157,7 @@ export default class Keyboard {
                     // keysym = KeyTable.XK_Super_L;
                     keysym = KeyTable.XK_Meta_R; // 133 dengjianshen
                     if (getQueryVariable('isCtrl') == true) {
+                        console.log('使用ctrl')
                         keysym = KeyTable.XK_Control_L
                     }
                     break;
