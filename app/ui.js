@@ -222,12 +222,12 @@ const UI = {
         window._refreshFiles = this.refreshFiles
         var canvas = document.querySelector('canvas')
         canvas.onmousemove = debounce(() => {
-            window.parent.recycling();
-            window.parent.tabAlive();
+            if (window.parent.recycling) window.parent.recycling();
+            if (window.parent.tabAlive) window.parent.tabAlive();
         }, 500)
         canvas.onkeyup = debounce(() => {
-            window.parent.recycling();
-            window.parent.tabAlive();
+            if (window.parent.recycling) window.parent.recycling();
+            if (window.parent.tabAlive) window.parent.tabAlive();
         }, 500)
 
         // canvas.onfocus = () => {
