@@ -207,16 +207,16 @@ const UI = {
 
         document.documentElement.classList.remove("noVNC_loading");
 
-        // let autoconnect = WebUtil.getConfigVar('autoconnect', false);
-        // if (autoconnect === 'true' || autoconnect == '1') {
-        //     autoconnect = true;
-        //     UI.connect();
-        // } else {
-        //     autoconnect = false;
-        //     // Show the connect panel on first load unless autoconnecting
-        //     UI.openConnectPanel();
-        // }
-        UI.connect();
+        let autoconnect = WebUtil.getConfigVar('autoconnect', false);
+        if (autoconnect === 'true' || autoconnect == '1') {
+            autoconnect = true;
+            UI.connect();
+        } else {
+            autoconnect = false;
+            // Show the connect panel on first load unless autoconnecting
+            UI.openConnectPanel();
+        }
+        // UI.connect();
 
         // dengjianshen
         window._refreshFiles = this.refreshFiles
