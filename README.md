@@ -3,7 +3,7 @@
 [![Test Status](https://github.com/novnc/noVNC/workflows/Test/badge.svg)](https://github.com/novnc/noVNC/actions?query=workflow%3ATest)
 [![Lint Status](https://github.com/novnc/noVNC/workflows/Lint/badge.svg)](https://github.com/novnc/noVNC/actions?query=workflow%3ALint)
 
-### Description update1
+### Description
 
 noVNC is both a HTML VNC client JavaScript library and an application built on
 top of that library. noVNC runs well in any modern browser including mobile
