@@ -1,13 +1,4 @@
-## noVNC: HTML VNC Client Library and Applicationdddddddd1
-
-[![Test Status](https://github.com/novnc/noVNC/workflows/Test/badge.svg)](https://github.com/novnc/noVNC/actions?query=workflow%3ATest)
-[![Lint Status](https://github.com/novnc/noVNC/workflows/Lint/badge.svg)](https://github.com/novnc/noVNC/actions?query=workflow%3ALint)
-
-### Description
-
-noVNC is both a HTML VNC client JavaScript library and an application built on
-top of that library. noVNC runs well in any modern browser including mobile
-browsers (iOS and Android).
+# old
 
 Many companies, projects and products have integrated noVNC including
 [OpenStack](http://www.openstack.org),
